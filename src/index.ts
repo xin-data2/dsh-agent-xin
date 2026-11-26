@@ -1,4 +1,4 @@
-import 'dotenv/config'; // 👈 就是这行！没有它读不到 .env 里的 Key
+import 'dotenv/config'; 
 import { Context } from './core/context';
 import { MyAgentEngine } from './core/agent-loop';
 import { ChatMemory } from './plugins/session-memory';
@@ -10,12 +10,8 @@ import { startCLI } from './cli';
 
 const ctx = new Context();
 
-// 读取环境变量
+
 const MY_KEY = process.env.DEEPSEEK_API_KEY || 'sk-123';
-
-// 👇 加上这行照妖镜，让你亲眼看到到底读到了啥
-console.log("🔑 当前读取到的 Key 是:", MY_KEY);
-
 ctx.register('llm', new MyDeepSeekChat(MY_KEY));
 ctx.register('session', new ChatMemory());
 
